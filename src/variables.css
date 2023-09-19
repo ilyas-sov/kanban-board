@@ -1,0 +1,8 @@
+:root {
+  --font-size-root: 16px;
+
+  --btn-color: orange;
+  --btn-color-secondary: #ffce47;
+  --drag-icon-color: #8a8a8a;
+  --header-background: #eee;
+}
