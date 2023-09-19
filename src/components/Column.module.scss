@@ -1,0 +1,35 @@
+.column {
+  border: 1px solid #000;
+  height: 600px;
+  flex: 0 0 300px;
+
+  .drag_container {
+    position: relative;
+
+    h2 {
+      font-size: 1.2rem;
+      text-align: center;
+      text-transform: capitalize;
+      padding: 10px;
+      background-color: var(--header-background);
+
+      &:hover + svg {
+        fill: var(--drag-icon-color);
+      }
+    }
+
+    svg {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      bottom: 0;
+      right: 10px;
+      margin: auto;
+      fill: transparent;
+
+      &:hover {
+        fill: var(--drag-icon-color);
+      }
+    }
+  }
+}
