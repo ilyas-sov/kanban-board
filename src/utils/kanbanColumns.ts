@@ -1,10 +1,4 @@
-interface kanbanColumnsInterface {
-  [index: string]: {
-    id: string;
-    name: string;
-    order: number | null;
-  };
-}
+import { kanbanColumnsInterface } from "./interfaces";
 
 const kanbanColumns: kanbanColumnsInterface = {};
 
@@ -14,6 +8,7 @@ Object.defineProperties(kanbanColumns, {
       id: "toDo",
       name: "to-do",
       order: 1,
+      tasks: [],
     },
     configurable: false,
     enumerable: true,
@@ -23,6 +18,7 @@ Object.defineProperties(kanbanColumns, {
       id: "inProgress",
       name: "in progress",
       order: 2,
+      tasks: [],
     },
     configurable: false,
     enumerable: true,
@@ -32,6 +28,7 @@ Object.defineProperties(kanbanColumns, {
       id: "done",
       name: "done",
       order: 3,
+      tasks: [],
     },
     configurable: false,
     enumerable: true,
