@@ -5,4 +5,9 @@
   --btn-color-secondary: #ffce47;
   --drag-icon-color: #8a8a8a;
   --header-background: #eee;
+  --btn-text-color: #0059ff;
+
+  --priority-color-low: #40a12f;
+  --priority-color-medium: #3968bf;
+  --priority-color-high: red;
 }
