@@ -1,0 +1,20 @@
+.select_container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  label {
+    text-transform: capitalize;
+  }
+
+  .select {
+    padding: 5px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+
+    option {
+      font-size: 1rem;
+    }
+  }
+}
