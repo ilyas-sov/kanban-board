@@ -16,7 +16,7 @@
 .dialog_container {
   width: 400px;
   top: 200px;
-  background-color: #fff;
+  background-color: #eee;
   padding: 10px;
 
   h3 {
@@ -28,10 +28,18 @@
     flex-direction: column;
     margin-top: 20px;
 
+    .options_container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
     input,
     textarea {
       margin-bottom: 10px;
       padding: 5px;
+      border: none;
+      resize: none;
     }
 
     input {
