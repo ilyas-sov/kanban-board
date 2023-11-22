@@ -1,34 +1,28 @@
-import { kanbanColumnsInterface } from "./interfaces";
+import { Columns, kanbanColumnsType } from "./types";
 
-const kanbanColumns: kanbanColumnsInterface = {};
+const kanbanColumns: kanbanColumnsType = {};
 
 Object.defineProperties(kanbanColumns, {
   column1: {
     value: {
-      id: "toDo",
+      id: Columns.TODO,
       name: "to-do",
-      order: 1,
-      tasks: [],
     },
     configurable: false,
     enumerable: true,
   },
   column2: {
     value: {
-      id: "inProgress",
+      id: Columns.IN_PROGRESS,
       name: "in progress",
-      order: 2,
-      tasks: [],
     },
     configurable: false,
     enumerable: true,
   },
   column3: {
     value: {
-      id: "done",
+      id: Columns.DONE,
       name: "done",
-      order: 3,
-      tasks: [],
     },
     configurable: false,
     enumerable: true,
