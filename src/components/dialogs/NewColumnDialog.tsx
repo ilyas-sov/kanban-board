@@ -34,6 +34,7 @@ const NewColumnDialog = observer(function NewColumnDialog({
           id="title"
           onChange={changeHandler}
           value={title}
+          autoFocus
           required
         />
         {columns.error && (

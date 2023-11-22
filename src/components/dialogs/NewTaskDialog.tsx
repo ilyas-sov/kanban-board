@@ -43,6 +43,7 @@ function NewTaskDialog({ onClose }: NewTaskDialogType) {
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setTitle(e.target.value)
           }
+          autoFocus
           required
         />
         <label htmlFor="description">Description</label>
