@@ -1,12 +1,38 @@
-import Column from "./Column";
+import { useState } from "react";
+import { flushSync } from "react-dom";
 import { observer } from "mobx-react-lite";
+import { tasks } from "../utils/tasks";
+import { Columns, Tasks } from "../utils/types";
+import { moveCardToColumn } from "../utils/moveCardToColumn";
 import { columns } from "../store/columnsStore";
+import { kanbanStore } from "../store/kanban-store";
+import Column from "./Column";
 import classes from "./Main.module.scss";
 
+const columnsArray = Object.entries(columns.columns).map(([_, value]) => value);
+
 const Main = observer(function Main() {
-  const columnsArray = Object.entries(columns.columns).map(
-    ([_, value]) => value
-  );
+  const [cards, setCards] = useState<Tasks>(tasks);
+
+  function onDrop(column: Columns, index: number) {
+    if (!kanbanStore.draggingCard) return;
+
+    const newCards = moveCardToColumn({
+      cards,
+      cardId: kanbanStore.draggingCard,
+      column,
+      index,
+    });
+
+    if (!document.startViewTransition) {
+      setCards(newCards);
+      return;
+    }
+
+    document.startViewTransition(() => {
+      flushSync(() => setCards(newCards));
+    });
+  }
 
   return (
     <main className={classes.main}>
@@ -14,9 +40,10 @@ const Main = observer(function Main() {
         {columnsArray.map((column) => (
           <Column
             key={column.id}
+            id={column.id}
             name={column.name}
-            tasks={column.tasks}
-            order={column.order}
+            tasks={cards[column.id]}
+            onDrop={onDrop}
           />
         ))}
       </div>
