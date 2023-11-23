@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { flushSync } from "react-dom";
 import { observer } from "mobx-react-lite";
-import { tasks } from "../utils/tasks";
 import { Columns, Tasks } from "../utils/types";
 import { moveCardToColumn } from "../utils/moveCardToColumn";
 import { columns } from "../store/columnsStore";
 import { kanbanStore } from "../store/kanban-store";
+import { tasksStore } from "../store/tasksStore";
 import Column from "./Column";
 import classes from "./Main.module.scss";
 
 const columnsArray = Object.entries(columns.columns).map(([_, value]) => value);
 
 const Main = observer(function Main() {
-  const [cards, setCards] = useState<Tasks>(tasks);
+  const [cards, setCards] = useState<Tasks>(tasksStore.tasks);
 
   function onDrop(column: Columns, index: number) {
     if (!kanbanStore.draggingCard) return;
