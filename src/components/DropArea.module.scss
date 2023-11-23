@@ -1,9 +1,27 @@
 .drop_area {
-  padding: 0 0;
+  padding: 0;
+  height: 10px;
+  position: relative;
   transition: all 0.2s linear;
-}
 
-.visible {
-  background-color: red;
-  padding: 20px 0;
+  &:last-of-type {
+    flex: 1;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+  }
+
+  &.visible {
+    padding: 40px 0;
+    background-color: transparent;
+
+    &::before {
+      inset: 5px 0px;
+      border-radius: 4px;
+      background-color: var(--bg-main);
+      opacity: 0.5;
+    }
+  }
 }

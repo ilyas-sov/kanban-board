@@ -32,9 +32,7 @@ function DropArea({ onDrop }: DropAreaType) {
       onDragLeave={dragLeaveHandler}
       onDrop={dropHandler}
       onDragOver={dragOverHandler}
-    >
-      Drop here...
-    </div>
+    ></div>
   );
 }
 
