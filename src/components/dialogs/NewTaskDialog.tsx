@@ -1,8 +1,9 @@
 import { SyntheticEvent, ChangeEvent, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Portal from "./Portal";
 import Options from "../Options";
 import { priorityOptions } from "../../utils/options"; // replace with import from store
-import { columns } from "../../store/columnsStore";
+import { tasksStore } from "../../store/tasksStore";
 import classes from "./NewTaskDialog.module.scss";
 
 type NewTaskDialogType = {
@@ -17,7 +18,15 @@ function NewTaskDialog({ onClose }: NewTaskDialogType) {
   function submitHandler(e: SyntheticEvent) {
     e.preventDefault();
 
-    columns.addTask({ priority, title, description });
+    tasksStore.addTask({
+      id: uuidv4().slice(0, 3).toUpperCase(),
+      title,
+      description,
+      priority,
+      status: "Pending",
+      users: [],
+    });
+
     onClose();
   }
 
