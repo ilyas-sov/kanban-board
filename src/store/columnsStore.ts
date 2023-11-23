@@ -21,30 +21,14 @@ class columnsStore {
       return;
     }
 
-    this.columns[`column${name}`] = {
-      id: name,
-      name: name,
-      order: null,
-      tasks: [],
-    };
+    // this.columns[`column${name}`] = {
+    // id: name,
+    // name: name,
+    // order: null,
+    // tasks: [],
+    // };
 
     this.error = "";
-  }
-
-  removeColumn(id: string) {}
-
-  addTask(taskData: { title: string; priority: string; description: string }) {
-    const todoColumn = Object.entries(this.columns).find(
-      ([_, obj]) => obj.id === "toDo"
-    );
-
-    if (todoColumn) {
-      this.columns[todoColumn?.[0]].tasks.push({
-        ...taskData,
-        id: Math.floor(Math.random() * 1000).toString(),
-        status: todoColumn[1].name,
-      });
-    }
   }
 }
 
