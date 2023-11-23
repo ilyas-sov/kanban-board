@@ -20,9 +20,9 @@ function TaskCard({ task }: TaskCardType) {
 
   return (
     <div
-      className={`${classes.container} ${classes[task.priority] ?? ""} ${
-        kanbanStore.draggingCard ? classes.dragged : ""
-      }`}
+      className={`${classes.container} ${
+        classes[task.priority] ?? classes.no_priority
+      } ${kanbanStore.draggingCard ? classes.dragged : ""}`}
       draggable={true}
       onDragStart={dragStartHandler}
       onDragEnd={dragEndHandler}
@@ -34,7 +34,20 @@ function TaskCard({ task }: TaskCardType) {
         <h3>{task.title}</h3>
         <span>{task.id}</span>
       </div>
-      <p>Priority: {task.priority}</p>
+      <div className={classes.assignees}>
+        {task.users.length > 0 && (
+          <>
+            <p>Assignees: </p>
+            <ul>
+              {task.users.map((user) => (
+                <li key={user.id}>
+                  {user.name} {user.surname}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
       <div className={classes.actions}>
         <button>View details</button>
       </div>
