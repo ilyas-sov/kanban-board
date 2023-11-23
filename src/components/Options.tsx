@@ -12,13 +12,7 @@ function Options({ id, options, value, onChange }: OptionsType) {
   return (
     <div className={classes.select_container}>
       <label htmlFor={id}>{id}</label>
-      <select
-        name={id}
-        id={id}
-        className={classes.select}
-        value={value}
-        onChange={onChange}
-      >
+      <select name={id} id={id} value={value} onChange={onChange}>
         {options.map((option) => (
           <option key={option} value={option}>
             {option}

@@ -2,16 +2,19 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  margin-bottom: 10px;
 
   label {
     text-transform: capitalize;
   }
 
-  .select {
+  select {
     padding: 5px;
     border: none;
     outline: none;
     font-size: 1rem;
+    background-color: var(--bg-main);
+    color: var(--text-color);
 
     option {
       font-size: 1rem;
