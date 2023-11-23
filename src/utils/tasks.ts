@@ -5,11 +5,12 @@ const users: User[] = [
   { id: "2", name: "Alice", surname: "Smith" },
 ];
 
-export const tasks: Tasks = {
+export const initialTasks: Tasks = {
   [Columns.TODO]: [
     {
       id: "1",
-      title: "Task 1",
+      title:
+        "Task 1 with some very long title which is much more than 70 characters and definitely will wrap more than one time",
       description: "Description for Task 1",
       status: "Pending",
       priority: "high",
