@@ -4,7 +4,7 @@ export type Task = {
   description: string;
   status: string;
   priority: string;
-  users?: User[];
+  users: User[];
 };
 
 export type User = {
