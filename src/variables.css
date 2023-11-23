@@ -1,13 +1,30 @@
 :root {
   --font-size-root: 16px;
 
-  --btn-color: orange;
-  --btn-color-secondary: #ffce47;
-  --drag-icon-color: #8a8a8a;
-  --header-background: #eee;
-  --btn-text-color: #0059ff;
+  --bg-main: #eee;
+  --bg-secondary: #bfbfbf;
+
+  --text-color-main: #212121;
+
+  --accent-main: orange;
+  --accent-secondary: #ffcc4a;
+
+  --border-color: gray;
 
   --priority-color-low: #40a12f;
   --priority-color-medium: #3968bf;
   --priority-color-high: red;
+
+  --black: #000000;
+  --grey: var(--border-color);
+  --light-grey: var(--bg-secondary);
+}
+
+body.dark {
+  --bg-main: #212121;
+  --bg-secondary: #404040;
+
+  --text-color-main: #e0e0e0;
+
+  --border-color: #000000;
 }
