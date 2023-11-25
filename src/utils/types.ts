@@ -4,13 +4,14 @@ export type Task = {
   description: string;
   status: string;
   priority: string;
-  users: User[];
+  users: string[];
 };
 
 export type User = {
   id: string;
   name: string;
   surname: string;
+  tasks: string[];
 };
 
 export type Tasks = {
@@ -29,3 +30,8 @@ export enum Columns {
   IN_PROGRESS = "IN_PROGRESS",
   DONE = "DONE",
 }
+
+export type Option = {
+  id: string;
+  value: string;
+};
