@@ -1,5 +1,6 @@
-import { DragEvent } from "react";
+import { Link } from "react-router-dom";
 import { kanbanStore } from "../store/kanban-store";
+import { usersStore } from "../store/usersStore";
 import { Task } from "../utils/types";
 import classes from "./TaskCard.module.scss";
 
@@ -8,15 +9,17 @@ type TaskCardType = {
 };
 
 function TaskCard({ task }: TaskCardType) {
-  function dragStartHandler(e: DragEvent<HTMLDivElement>) {
+  function dragStartHandler() {
     kanbanStore.setDraggingCard(task.id);
   }
 
-  function dragEndHandler(e: DragEvent<HTMLDivElement>) {
+  function dragEndHandler() {
     kanbanStore.setDraggingCard(null);
   }
 
-  function dragOverHandler(e: DragEvent<HTMLDivElement>) {}
+  function dragOverHandler() {}
+
+  const users = usersStore.users.filter((user) => task.users.includes(user.id));
 
   return (
     <div
@@ -39,7 +42,7 @@ function TaskCard({ task }: TaskCardType) {
           <>
             <p>Assignees: </p>
             <ul>
-              {task.users.map((user) => (
+              {users.map((user) => (
                 <li key={user.id}>
                   {user.name} {user.surname}
                 </li>
@@ -49,7 +52,7 @@ function TaskCard({ task }: TaskCardType) {
         )}
       </div>
       <div className={classes.actions}>
-        <button>View details</button>
+        <Link to={`/tasks/${task.id}`}>View details</Link>
       </div>
     </div>
   );
