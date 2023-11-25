@@ -35,19 +35,17 @@ const Main = observer(function Main() {
   }
 
   return (
-    <main className={classes.main}>
-      <div className={classes.kanban_board}>
-        {columnsArray.map((column) => (
-          <Column
-            key={column.id}
-            id={column.id}
-            name={column.name}
-            tasks={cards[column.id]}
-            onDrop={onDrop}
-          />
-        ))}
-      </div>
-    </main>
+    <div className={classes.kanban_board}>
+      {columnsArray.map((column) => (
+        <Column
+          key={column.id}
+          id={column.id}
+          name={column.name}
+          tasks={cards[column.id]}
+          onDrop={onDrop}
+        />
+      ))}
+    </div>
   );
 });
 
