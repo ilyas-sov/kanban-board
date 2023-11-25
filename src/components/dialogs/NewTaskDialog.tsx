@@ -1,9 +1,11 @@
 import { SyntheticEvent, ChangeEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { tasksStore } from "../../store/tasksStore";
+import { usersStore } from "../../store/usersStore";
+import { priorityOptions } from "../../utils/options"; // replace with import from store
 import Portal from "./Portal";
 import Options from "../Options";
-import { priorityOptions } from "../../utils/options"; // replace with import from store
-import { tasksStore } from "../../store/tasksStore";
+import Tag from "../Tag";
 import classes from "./NewTaskDialog.module.scss";
 
 type NewTaskDialogType = {
@@ -11,12 +13,42 @@ type NewTaskDialogType = {
 };
 
 function NewTaskDialog({ onClose }: NewTaskDialogType) {
-  const [priority, setPriority] = useState(priorityOptions[0]);
+  const [priority, setPriority] = useState(priorityOptions[0].value);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [assignees, setAssignees] = useState<{ id: string; value: string }[]>(
+    []
+  );
+
+  const users = usersStore.users.map((user) => ({
+    id: user.id,
+    value: `${user.name} ${user.surname}`,
+  }));
+
+  function assignUser(e: ChangeEvent<HTMLSelectElement>) {
+    const selectedId = e.target.selectedOptions[0].id;
+    if (!selectedId) return;
+
+    const userIsAssigned = assignees.find(
+      (assignee) => assignee.id === selectedId
+    );
+
+    if (userIsAssigned) return;
+
+    setAssignees((prev) => [
+      ...prev,
+      { id: selectedId, value: e.target.value },
+    ]);
+  }
+
+  function deleteAssignee(id: string) {
+    setAssignees((prev) => prev.filter((user) => user.id !== id));
+  }
 
   function submitHandler(e: SyntheticEvent) {
     e.preventDefault();
+
+    const users = assignees.map((assignee) => assignee.id);
 
     tasksStore.addTask({
       id: uuidv4().slice(0, 3).toUpperCase(),
@@ -24,7 +56,7 @@ function NewTaskDialog({ onClose }: NewTaskDialogType) {
       description,
       priority,
       status: "Pending",
-      users: [],
+      users,
     });
 
     onClose();
@@ -34,22 +66,34 @@ function NewTaskDialog({ onClose }: NewTaskDialogType) {
     <Portal className={classes.dialog_container}>
       <h3>Add a new Task</h3>
       <form onSubmit={submitHandler}>
-        <Options
-          id="priority"
-          options={priorityOptions}
-          value={priority}
-          onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-            setPriority(e.target.value)
-          }
-        />
-        <label htmlFor="title" id="title">
-          Title
-        </label>
-        <input
+        <div className={classes.flex}>
+          <Options
+            id="priority"
+            options={priorityOptions}
+            value={priority}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              setPriority(e.target.value)
+            }
+          />
+          <Options id="assign to" options={users} onChange={assignUser} />
+        </div>
+        <ul className={classes.assignees_tags}>
+          {assignees.map((assignee) => (
+            <li key={assignee.id}>
+              <Tag
+                value={assignee.value}
+                onDelete={() => deleteAssignee(assignee.id)}
+              />
+            </li>
+          ))}
+        </ul>
+        <label htmlFor="title">Title</label>
+        <textarea
+          name="title"
           id="title"
-          type="text"
+          className={classes.title}
           value={title}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             setTitle(e.target.value)
           }
           autoFocus
@@ -65,7 +109,7 @@ function NewTaskDialog({ onClose }: NewTaskDialogType) {
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             setDescription(e.target.value)
           }
-        ></textarea>
+        />
         <div className={classes.actions}>
           <button type="button" className={classes.cancel} onClick={onClose}>
             Cancel
