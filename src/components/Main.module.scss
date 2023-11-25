@@ -1,12 +1,7 @@
-.main {
-  margin-top: 20px;
-  padding: 0 20px;
-
-  .kanban_board {
-    display: flex;
-    margin: 0 auto;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 10px;
-  }
+.kanban_board {
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 10px;
 }
