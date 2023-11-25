@@ -1,0 +1,26 @@
+.tag_container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: var(--grey);
+
+  &:hover {
+    background-color: var(--light-grey);
+    color: var(--black);
+
+    svg path {
+      fill: var(--black);
+    }
+  }
+
+  svg {
+    cursor: pointer;
+  }
+
+  svg path {
+    fill: var(--text-color-main);
+  }
+}
