@@ -8,6 +8,10 @@ class UsersStore {
   constructor() {
     makeAutoObservable(this);
   }
+
+  getUserById(id: string) {
+    return this.users.find((user) => user.id === id);
+  }
 }
 
 export const usersStore = new UsersStore();
