@@ -42,11 +42,20 @@ function TaskCard({ task }: TaskCardType) {
           <>
             <p>Assignees: </p>
             <ul>
-              {users.map((user) => (
-                <li key={user.id}>
-                  {user.name} {user.surname}
-                </li>
-              ))}
+              {users
+                .sort((a, b) => {
+                  if (a.name > b.name) return 1;
+                  if (a.name < b.name) return -1;
+                  else {
+                    if (a.surname > b.surname) return 1;
+                    else return -1;
+                  }
+                })
+                .map((user) => (
+                  <li key={user.id}>
+                    {user.name} {user.surname}
+                  </li>
+                ))}
             </ul>
           </>
         )}
