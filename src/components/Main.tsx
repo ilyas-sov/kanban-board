@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { flushSync } from "react-dom";
 import { observer } from "mobx-react-lite";
-import { Columns, Tasks } from "../utils/types";
-import { moveCardToColumn } from "../utils/moveCardToColumn";
+import { Columns } from "../utils/types";
 import { columns } from "../store/columnsStore";
 import { kanbanStore } from "../store/kanban-store";
 import { tasksStore } from "../store/tasksStore";
@@ -12,26 +10,30 @@ import classes from "./Main.module.scss";
 const columnsArray = Object.entries(columns.columns).map(([_, value]) => value);
 
 const Main = observer(function Main() {
-  const [cards, setCards] = useState<Tasks>(tasksStore.tasks);
+  const cards = tasksStore.tasks;
 
   function onDrop(column: Columns, index: number) {
     if (!kanbanStore.draggingCard) return;
 
-    const newCards = moveCardToColumn({
-      cards,
-      cardId: kanbanStore.draggingCard,
-      column,
-      index,
-    });
+    const task = tasksStore.getTask(kanbanStore.draggingCard);
 
-    if (!document.startViewTransition) {
-      setCards(newCards);
-      return;
+    if (task) {
+      if (!document.startViewTransition) {
+        tasksStore.changeStatus(task.status as Columns, task.id, column, index);
+        return;
+      }
+
+      document.startViewTransition(() => {
+        flushSync(() =>
+          tasksStore.changeStatus(
+            task.status as Columns,
+            task.id,
+            column,
+            index
+          )
+        );
+      });
     }
-
-    document.startViewTransition(() => {
-      flushSync(() => setCards(newCards));
-    });
   }
 
   return (
