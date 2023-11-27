@@ -8,6 +8,7 @@ export const priorityOptions: readonly Option[] = Object.freeze([
   { id: "high", value: "high" },
 ]);
 
-export const columnOptions = Object.entries(kanbanColumns).map(
-  ([_, obj]) => obj.name
-);
+export const columnOptions = Object.entries(kanbanColumns).map(([_, obj]) => ({
+  id: obj.id,
+  value: obj.name,
+}));
