@@ -6,13 +6,22 @@ type OptionsType = {
   id: string;
   options: readonly Option[];
   value?: string | undefined;
+  className?: string;
+  label?: boolean;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
 
-function Options({ id, options, value, onChange }: OptionsType) {
+function Options({
+  id,
+  options,
+  value,
+  className,
+  label = true,
+  onChange,
+}: OptionsType) {
   return (
-    <div className={classes.select_container}>
-      <label htmlFor={id}>{id}</label>
+    <div className={`${classes.select_container} ${className}`}>
+      {label && <label htmlFor={id}>{id}</label>}
       <select name={id} id={id} value={value} onChange={onChange}>
         {!value && <option value="">Select user</option>}
         {options.map((option) => (
