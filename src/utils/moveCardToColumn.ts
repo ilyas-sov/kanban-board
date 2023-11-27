@@ -3,12 +3,12 @@ import { Columns, Tasks } from "./types";
 export function moveCardToColumn({
   cards,
   cardId,
-  column,
+  newColumn,
   index,
 }: {
   cards: Tasks;
   cardId: string;
-  column: Columns;
+  newColumn: Columns;
   index: number;
 }): Tasks {
   const card = Object.entries(cards)
@@ -17,23 +17,26 @@ export function moveCardToColumn({
 
       if (!card) return null;
 
-      return { previousColumn: column as Columns, card };
+      return {
+        previousColumn: column as Columns,
+        card: { ...card, status: newColumn },
+      };
     })
     .filter(Boolean)[0];
 
   if (!card) return cards;
 
-  if (card.previousColumn === column) return cards; // RE-DO
+  if (card.previousColumn === newColumn) return cards; // RE-DO
 
   const newCards = {
     ...cards,
     [card.previousColumn]: cards[card.previousColumn].filter(
       (card) => card.id !== cardId
     ),
-    [column]: [
-      ...cards[column].slice(0, index),
+    [newColumn]: [
+      ...cards[newColumn].slice(0, index),
       card.card,
-      ...cards[column].slice(index),
+      ...cards[newColumn].slice(index),
     ],
   };
 
