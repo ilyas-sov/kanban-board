@@ -13,31 +13,6 @@ class TasksStore {
     this.tasks[Columns.TODO].push(taskData);
   }
 
-  assignUser(column: Columns, taskId: string, userId: string) {
-    const task = this.tasks[column].find((task) => task.id === taskId);
-
-    task?.users.push(userId);
-  }
-
-  deleteUser(column: Columns, taskId: string, userId: string) {
-    const task = this.tasks[column].find((task) => task.id === taskId);
-
-    if (task) {
-      const taskId = this.tasks[column].indexOf(task);
-      const updatedUsers = task?.users.filter((id) => id !== userId);
-      this.tasks[column][taskId].users = updatedUsers;
-    }
-  }
-
-  changePriority(column: Columns, taskId: string, newPriority: string) {
-    const task = this.tasks[column].find((task) => task.id === taskId);
-
-    if (task) {
-      const taskId = this.tasks[column].indexOf(task);
-      this.tasks[column][taskId].priority = newPriority;
-    }
-  }
-
   changeStatus(
     column: Columns,
     taskId: string,
@@ -63,6 +38,31 @@ class TasksStore {
     }
   }
 
+  updateTask(
+    column: Columns,
+    taskId: string,
+    newProperties: {
+      title: string;
+      description: string;
+      status: Columns;
+      priority: string;
+      users: string[];
+    }
+  ) {
+    this.changeStatus(column, taskId, newProperties.status);
+
+    const task = this.tasks[newProperties.status].find(
+      (task) => task.id === taskId
+    );
+
+    if (task) {
+      task.title = newProperties.title;
+      task.description = newProperties.description;
+      task.priority = newProperties.priority;
+      task.users = newProperties.users;
+    }
+  }
+
   getTask(id: string | undefined) {
     if (!id) return;
     const tasksArray = Object.entries(this.tasks);
@@ -76,7 +76,7 @@ class TasksStore {
       task = currentTasks.find((task) => task.id === id);
 
       if (task) {
-        task = { ...task, status: currentColumn };
+        task = { ...task, status: currentColumn as Columns };
         break;
       }
     }
