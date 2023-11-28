@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { tasksStore } from "../../store/tasksStore";
 import { usersStore } from "../../store/usersStore";
 import { priorityOptions } from "../../utils/options"; // replace with import from store
+import { Columns } from "../../utils/types";
 import Portal from "./Portal";
 import Options from "../Options";
 import Tag from "../Tag";
@@ -55,7 +56,7 @@ function NewTaskDialog({ onClose }: NewTaskDialogType) {
       title,
       description,
       priority,
-      status: "Pending",
+      status: Columns.TODO,
       users,
     });
 
