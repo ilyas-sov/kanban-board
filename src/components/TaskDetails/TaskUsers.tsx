@@ -1,18 +1,16 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { usersStore } from "../../store/usersStore";
-import { Columns, User } from "../../utils/types";
-import { tasksStore } from "../../store/tasksStore";
+import { User } from "../../utils/types";
 import Tag from "../Tag";
 import Options from "../Options";
 import classes from "./TaskDetails.module.scss";
 
 type TaskUsersType = {
   users: string[];
-  column: Columns;
-  taskId: string;
+  onSetUsers: (u: string[]) => void;
 };
 
-function TaskUsers({ users, column, taskId }: TaskUsersType) {
+function TaskUsers({ users, onSetUsers }: TaskUsersType) {
   const [usersInfo, setUsersInfo] = useState<User[]>([]);
 
   const usersOptions = usersStore.users.map((user) => ({
@@ -37,11 +35,15 @@ function TaskUsers({ users, column, taskId }: TaskUsersType) {
 
     if (!selectedUserId || users.includes(selectedUserId)) return;
 
-    tasksStore.assignUser(column, taskId, selectedUserId);
+    const newUsers = [...users, selectedUserId];
+
+    onSetUsers(newUsers);
   }
 
   function deleteAssignee(userId: string) {
-    tasksStore.deleteUser(column, taskId, userId);
+    const newUsers = users.filter((id) => id !== userId);
+
+    onSetUsers(newUsers);
   }
 
   return (
