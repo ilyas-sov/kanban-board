@@ -1,17 +1,47 @@
 .details_container {
   margin: 0 auto;
   max-width: 900px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 20px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--grey);
+
+    &:hover {
+      background-color: var(--light-grey);
+    }
+  }
+
+  .btn_back {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--black);
+
+    svg {
+      width: 8px;
+    }
+  }
 
   form {
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 20px;
-
-    p {
-      padding: 0 10px;
+    .label {
+      margin-bottom: 10px;
     }
 
-    .title_container {
+    .title_container,
+    .description_container {
       display: flex;
       justify-content: space-between;
       gap: 10px;
@@ -20,15 +50,19 @@
 
       h3 {
         font-size: 1.8rem;
-        padding: 10px;
+        padding-top: 10px;
       }
 
-      .save_title_btn svg,
-      .save_title_btn:hover svg {
+      .btn_mt_10 {
+        margin-top: 10px;
+      }
+
+      .save_btn svg,
+      .save_btn:hover svg {
         fill: var(--priority-color-low);
       }
 
-      .save_title_btn:disabled {
+      .save_btn:disabled {
         border-color: var(--bg-main);
 
         svg {
@@ -40,7 +74,8 @@
         }
       }
 
-      .task_title_textarea {
+      .task_title_textarea,
+      .task_description_textarea {
         width: 100%;
         padding: 10px;
         font-size: 1.8rem;
@@ -53,6 +88,17 @@
         border-radius: 4px;
       }
 
+      .task_description_textarea {
+        font-size: 1rem;
+        font-weight: normal;
+        height: 400px;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
       .required {
         border: 1px solid var(--priority-color-high);
       }
@@ -61,6 +107,7 @@
     .related_info {
       display: flex;
       gap: 20%;
+      margin-bottom: 20px;
 
       & > * {
         flex: 1;
@@ -73,6 +120,24 @@
 
       ul li {
         margin-bottom: 5px;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+
+      .save {
+        background-color: var(--accent-secondary);
+
+        &:hover {
+          background-color: var(--accent-main);
+        }
+
+        &:disabled {
+          background-color: var(--light-grey);
+        }
       }
     }
   }
