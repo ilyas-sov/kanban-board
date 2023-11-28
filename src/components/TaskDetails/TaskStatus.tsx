@@ -1,17 +1,22 @@
 import { ChangeEvent } from "react";
-import { tasksStore } from "../../store/tasksStore";
 import { columnOptions, priorityOptions } from "../../utils/options";
 import { Columns } from "../../utils/types";
 import Options from "../Options";
 import classes from "./TaskDetails.module.scss";
 
 type TaskStatusType = {
-  id: string;
   priority: string;
   status: Columns;
+  onSetStatus: (s: Columns) => void;
+  onSetPriority: (p: string) => void;
 };
 
-function TaskStatus({ id, priority, status }: TaskStatusType) {
+function TaskStatus({
+  priority,
+  status,
+  onSetStatus,
+  onSetPriority,
+}: TaskStatusType) {
   const currentStatus = columnOptions.find(
     (column) => column.id === status
   )?.value;
@@ -24,7 +29,7 @@ function TaskStatus({ id, priority, status }: TaskStatusType) {
         value={priority}
         className={classes.task_status_options}
         onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-          tasksStore.changePriority(status, id, e.target.value);
+          onSetPriority(e.target.value);
         }}
       />
       <Options
@@ -33,11 +38,7 @@ function TaskStatus({ id, priority, status }: TaskStatusType) {
         value={currentStatus}
         className={classes.task_status_options}
         onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-          tasksStore.changeStatus(
-            status,
-            id,
-            e.target.selectedOptions[0].id as Columns
-          );
+          onSetStatus(e.target.selectedOptions[0].id as Columns);
         }}
       />
     </div>
