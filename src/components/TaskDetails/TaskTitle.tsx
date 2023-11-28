@@ -57,13 +57,13 @@ function TaskTitle({ taskTitle, onSetTitle }: TaskTitleType) {
         />
       )}
       {!editTitle && (
-        <Button onClick={editTitleClickHandler}>
+        <Button className={classes.btn_mt_10} onClick={editTitleClickHandler}>
           <EditIcon />
         </Button>
       )}
       {editTitle && (
         <Button
-          className={classes.save_title_btn}
+          className={`${classes.btn_mt_10} ${classes.save_btn}`}
           onClick={saveTitleClickHandler}
           disabled={!taskTitle}
         >
