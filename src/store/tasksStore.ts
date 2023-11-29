@@ -63,6 +63,12 @@ class TasksStore {
     }
   }
 
+  deleteTask(column: Columns, taskId: string) {
+    this.tasks[column] = this.tasks[column].filter(
+      (task) => task.id !== taskId
+    );
+  }
+
   getTask(id: string | undefined) {
     if (!id) return;
     const tasksArray = Object.entries(this.tasks);
