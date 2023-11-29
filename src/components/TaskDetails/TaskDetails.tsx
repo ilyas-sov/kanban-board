@@ -1,17 +1,22 @@
 import { SyntheticEvent, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { tasksStore } from "../../store/tasksStore";
 import { Columns } from "../../utils/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
+import TaskOptions from "./TaskOptions";
 import TaskTitle from "./TaskTitle";
 import TaskUsers from "./TaskUsers";
 import TaskStatus from "./TaskStatus";
 import TaskDescription from "./TaskDescription";
+import Button from "../UI/Button";
+import DeleteTaskConfirmation from "./DeleteTaskConfirmation";
+import GoBackConfirmation from "./GoBackConfirmation";
 import classes from "./TaskDetails.module.scss";
 
 const TaskDetails = observer(function TaskDetails() {
   const params = useParams();
+  const navigate = useNavigate();
 
   const task = tasksStore.getTask(params.id);
 
@@ -21,12 +26,62 @@ const TaskDetails = observer(function TaskDetails() {
   const [priority, setPriority] = useState(task?.priority ?? "none");
   const [users, setUsers] = useState(task?.users ?? []);
 
+  const [confirmDialogIsOpen, setConfirmDialogIsOpen] = useState(false);
+  const [optionsAreOpened, setOptionsAreOpened] = useState(false);
+  const [confirmDeletionDialogIsOpen, setConfirmDeletionDialogIsOpen] =
+    useState(false);
+
   const taskWasChanged =
     title !== task?.title ||
     description !== task.description ||
     status !== task.status ||
     priority !== task.priority ||
     users.slice().sort().toString() !== task?.users.slice().sort().toString();
+
+  function undoChangesHandler() {
+    if (confirmDialogIsOpen) {
+      resetState();
+      navigate("/");
+    } else {
+      resetState();
+    }
+  }
+
+  function resetState() {
+    if (task) {
+      setTitle(task.title);
+      setDescription(task.description);
+      setPriority(task.priority);
+      setStatus(task.status);
+      setUsers(task.users);
+    }
+  }
+
+  function goBackHandler(e: SyntheticEvent<HTMLAnchorElement>) {
+    if (taskWasChanged) {
+      e.preventDefault();
+      setConfirmDialogIsOpen(true);
+    }
+  }
+
+  function optionsHandler() {
+    if (!optionsAreOpened) {
+      setOptionsAreOpened(true);
+    } else {
+      setOptionsAreOpened(false);
+    }
+  }
+
+  function deleteTaskHandler() {
+    setConfirmDeletionDialogIsOpen(true);
+  }
+
+  function deleteHandler() {
+    if (task) {
+      tasksStore.deleteTask(task.status, task.id);
+      navigate("/");
+    }
+  }
 
   function submitHandler(e: SyntheticEvent) {
     e.preventDefault();
@@ -39,8 +94,15 @@ const TaskDetails = observer(function TaskDetails() {
       users,
     };
 
-    if (task) {
-      tasksStore.updateTask(task.status as Columns, task?.id, newProperties);
+    if (confirmDialogIsOpen) {
+      if (task) {
+        tasksStore.updateTask(task.status as Columns, task.id, newProperties);
+      }
+      navigate("/");
+    } else {
+      if (task) {
+        tasksStore.updateTask(task.status as Columns, task.id, newProperties);
+      }
     }
   }
 
@@ -51,10 +113,30 @@ const TaskDetails = observer(function TaskDetails() {
     <div className={classes.details_container}>
       <form onSubmit={submitHandler}>
         <div className={classes.header}>
-          <Link to="/" className={`${classes.btn} ${classes.btn_back}`}>
-            <ArrowLeftIcon /> Back
-          </Link>
-          <p>Task: {task.id}</p>
+          <div>
+            <Link
+              to="/"
+              className={`${classes.btn} ${classes.btn_back}`}
+              onClick={goBackHandler}
+            >
+              <ArrowLeftIcon /> Back
+            </Link>
+            <p>Task: {task.id}</p>
+          </div>
+          <div>
+            {optionsAreOpened && (
+              <TaskOptions
+                options={["delete task"]}
+                onDeleteTask={deleteTaskHandler}
+              />
+            )}
+            <Button
+              className={`${classes.btn_mt_10} ${classes.options_btn}`}
+              onClick={optionsHandler}
+            >
+              <span>•••</span>
+            </Button>
+          </div>
         </div>
         <TaskTitle taskTitle={title} onSetTitle={setTitle} />
         <div className={classes.related_info}>
@@ -72,7 +154,12 @@ const TaskDetails = observer(function TaskDetails() {
           onSetDescription={setDescription}
         />
         <div className={classes.actions}>
-          <button type="button" className={classes.btn}>
+          <button
+            type="button"
+            className={classes.btn}
+            disabled={!taskWasChanged}
+            onClick={undoChangesHandler}
+          >
             Undo changes
           </button>
           <button
@@ -84,6 +171,19 @@ const TaskDetails = observer(function TaskDetails() {
           </button>
         </div>
       </form>
+      {confirmDialogIsOpen && (
+        <GoBackConfirmation
+          onCancel={() => setConfirmDialogIsOpen(false)}
+          onUndoChanges={undoChangesHandler}
+          onSaveChanges={submitHandler}
+        />
+      )}
+      {confirmDeletionDialogIsOpen && (
+        <DeleteTaskConfirmation
+          onCancel={() => setConfirmDeletionDialogIsOpen(false)}
+          onDelete={deleteHandler}
+        />
+      )}
     </div>
   );
 });
