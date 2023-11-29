@@ -1,3 +1,19 @@
+.btn {
+  font-size: 1rem;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--grey);
+
+  &:hover {
+    background-color: var(--light-grey);
+  }
+
+  &:disabled {
+    background-color: var(--light-grey);
+  }
+}
+
 .details_container {
   margin: 0 auto;
   max-width: 900px;
@@ -7,20 +23,17 @@
 
   .header {
     display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 10px;
-  }
+    justify-content: space-between;
 
-  .btn {
-    font-size: 1rem;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: var(--grey);
+    div {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
 
-    &:hover {
-      background-color: var(--light-grey);
+    div:last-child {
+      position: relative;
     }
   }
 
@@ -32,6 +45,16 @@
 
     svg {
       width: 8px;
+    }
+  }
+
+  .options_btn {
+    border: none;
+    color: var(--text-color-main);
+
+    span {
+      letter-spacing: 2px;
+      margin-right: -2px;
     }
   }
 
@@ -122,23 +145,49 @@
         margin-bottom: 5px;
       }
     }
+  }
+}
 
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 15px;
+.options_container {
+  background-color: var(--grey);
+  padding: 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  position: absolute;
+  left: -125px;
+  top: 0;
 
-      .save {
-        background-color: var(--accent-secondary);
+  li {
+    padding: 3px;
+    border-radius: 4px;
+    cursor: pointer;
 
-        &:hover {
-          background-color: var(--accent-main);
-        }
+    button {
+      text-transform: capitalize;
+      background-color: var(--border-color);
+      color: var(--priority-color-high);
 
-        &:disabled {
-          background-color: var(--light-grey);
-        }
+      &:hover {
+        background-color: var(--bg-main);
       }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+
+  .save {
+    background-color: var(--accent-secondary);
+
+    &:hover {
+      background-color: var(--accent-main);
+    }
+
+    &:disabled {
+      background-color: var(--light-grey);
     }
   }
 }
@@ -151,5 +200,29 @@
     min-width: 50%;
     max-width: 250px;
     text-transform: capitalize;
+  }
+}
+
+.confirm_dialog {
+  max-width: 500px;
+  padding: 20px;
+
+  h3 {
+    font-weight: normal;
+  }
+
+  .dialog_btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .delete {
+    background-color: var(--border-color);
+    color: var(--priority-color-high);
+
+    &:hover {
+      background-color: var(--bg-main);
+    }
   }
 }
