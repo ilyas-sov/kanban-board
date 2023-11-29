@@ -1,5 +1,6 @@
 export type Task = {
   id: string;
+  created_at: number;
   title: string;
   description: string;
   status: Columns;
