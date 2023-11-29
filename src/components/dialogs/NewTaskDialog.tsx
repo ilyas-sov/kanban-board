@@ -53,6 +53,7 @@ function NewTaskDialog({ onClose }: NewTaskDialogType) {
 
     tasksStore.addTask({
       id: uuidv4().slice(0, 3).toUpperCase(),
+      created_at: Date.now(),
       title,
       description,
       priority,
