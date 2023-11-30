@@ -1,0 +1,53 @@
+.toggler {
+  position: relative;
+  margin: 0 40px;
+  cursor: pointer;
+
+  .icon {
+    path,
+    line,
+    polyline {
+      stroke: var(--grey);
+    }
+  }
+
+  input {
+    display: none;
+  }
+
+  .slider {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background-color: transparent;
+    transform: translateY(0px);
+    box-shadow: none;
+    transition: transform 0.6s linear;
+  }
+
+  input:checked ~ .slider {
+    transform: translateY(-12px);
+    animation: light-up 0.3s linear forwards;
+    animation-delay: 0.5s;
+    background-color: gold;
+  }
+}
+
+@keyframes light-up {
+  60% {
+    transform: translateY(-19px);
+    width: 17px;
+    height: 17px;
+  }
+  100% {
+    transform: translateY(-19px);
+    box-shadow: 0 0 20px 7px gold;
+    width: 17px;
+    height: 17px;
+  }
+}
