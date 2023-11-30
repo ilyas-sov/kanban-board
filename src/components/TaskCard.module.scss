@@ -6,7 +6,7 @@
   border: 1px solid var(--border-color);
   border-radius: 4px;
   position: relative;
-  background-color: var(--bg-main);
+  background-color: var(--bg-secondary);
 
   .header {
     display: flex;
@@ -36,8 +36,8 @@
     a {
       padding: 5px 10px;
       border-radius: 4px;
-      background-color: var(--bg-secondary);
-      color: var(--text-color);
+      background-color: var(--btn-main);
+      color: var(--text-color-main);
       font-size: 0.8rem;
 
       &:hover {

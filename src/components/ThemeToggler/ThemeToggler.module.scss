@@ -7,7 +7,7 @@
     path,
     line,
     polyline {
-      stroke: var(--grey);
+      stroke: var(--text-color-main);
     }
   }
 
@@ -35,6 +35,14 @@
     animation: light-up 0.3s linear forwards;
     animation-delay: 0.5s;
     background-color: gold;
+  }
+
+  input:checked ~ .icon {
+    path,
+    line,
+    polyline {
+      stroke: var(--black);
+    }
   }
 }
 

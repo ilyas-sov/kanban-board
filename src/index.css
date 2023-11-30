@@ -10,7 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: var(--font-size-root);
   color: var(--text-color-main);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-body);
 }
 
 * {
@@ -37,6 +37,10 @@ button,
 a {
   cursor: pointer;
   border: none;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 a {
