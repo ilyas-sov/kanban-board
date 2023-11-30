@@ -1,7 +1,8 @@
 import { useState } from "react";
-import classes from "./Header.module.scss";
 import NewTaskDialog from "./dialogs/NewTaskDialog";
 import NewColumnDialog from "./dialogs/NewColumnDialog";
+import ThemeToggler from "./ThemeToggler/ThemeToggler";
+import classes from "./Header.module.scss";
 
 function Header() {
   const [taskDialogIsOpen, setTaskDialogIsOpen] = useState(false);
@@ -13,6 +14,7 @@ function Header() {
       <div className={classes.actions}>
         <button onClick={() => setTaskDialogIsOpen(true)}>Add Task</button>
         <button onClick={() => setColumnDialogIsOpen(true)}>Add Column</button>
+        <ThemeToggler />
       </div>
       {taskDialogIsOpen && (
         <NewTaskDialog onClose={() => setTaskDialogIsOpen(false)} />
