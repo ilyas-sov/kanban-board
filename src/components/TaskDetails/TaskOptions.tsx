@@ -11,7 +11,11 @@ function TaskOptions({ options, onDeleteTask }: TaskOptionsType) {
       <ul>
         {options.map((option) => (
           <li key={option}>
-            <button className={classes.btn} onClick={onDeleteTask}>
+            <button
+              type="button"
+              className={classes.btn}
+              onClick={onDeleteTask}
+            >
               {option}
             </button>
           </li>
