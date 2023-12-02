@@ -1,21 +1,19 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Header from "./components/Header";
+import Layout from "./components/Layout";
 import Main from "./components/Main";
 import TaskDetails from "./components/TaskDetails/TaskDetails";
-import classes from "./App.module.css";
+import Users from "./components/Users/Users";
 
 function App() {
   return (
-    <>
-      <Header />
-      <main className={classes.main}>
-        <Routes>
-          <Route path="/" index element={<Navigate to="/tasks" />} />
-          <Route path="/tasks" element={<Main />} />
-          <Route path="/tasks/:id" element={<TaskDetails />} />
-        </Routes>
-      </main>
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Navigate to="/tasks" />} />
+        <Route path="/tasks" element={<Main />} />
+        <Route path="/tasks/:id" element={<TaskDetails />} />
+        <Route path="users" element={<Users />} />
+      </Route>
+    </Routes>
   );
 }
 
