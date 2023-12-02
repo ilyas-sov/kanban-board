@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
-import classes from "./ThemeToggler.module.scss";
+import { Theme } from "../../utils/types";
+import { getTheme, setTheme, toggleTheme } from "../../utils/theme";
 import BulbIcon from "../icons/BulbIcon";
+import classes from "./ThemeToggler.module.scss";
 
 function ThemeToggler() {
-  const [togglerChecked, setTogglerChecked] = useState(false);
+  const theme = getTheme();
+  const [togglerChecked, setTogglerChecked] = useState(theme === Theme.DARK);
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout> | number | undefined = undefined;
 
     if (togglerChecked) {
-      clearTimeout(timeout);
-      document.body.classList.add("dark");
+      toggleTheme(timeout, Theme.DARK);
+      setTheme(Theme.DARK);
     } else {
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-      timeout = setTimeout(() => {
-        document.body.classList.remove("dark");
-      }, 800);
+      toggleTheme(timeout, Theme.LIGHT);
+      setTheme(Theme.LIGHT);
     }
 
     return () => {
@@ -32,12 +31,13 @@ function ThemeToggler() {
   return (
     <label className={classes.toggler}>
       <BulbIcon className={classes.icon} />
-      <input type="checkbox" onChange={toggleThemeHandler} />
-      <span
-        className={`${classes.slider} ${
-          togglerChecked ? classes.sun : classes.moon
-        }`}
-      ></span>
+      <input
+        id="themeToggler"
+        type="checkbox"
+        onChange={toggleThemeHandler}
+        checked={togglerChecked}
+      />
+      <span className={classes.slider}></span>
       <span className={classes.shadow}></span>
     </label>
   );
