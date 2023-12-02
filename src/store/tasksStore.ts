@@ -4,6 +4,7 @@ import { initialTasks } from "../utils/mockData/tasks";
 
 class TasksStore {
   tasks: Tasks = initialTasks;
+  taskWasChanged: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -71,6 +72,8 @@ class TasksStore {
       task.priority = newProperties.priority;
       task.users = newProperties.users;
     }
+
+    this.taskWasChanged = false;
   }
 
   deleteTask(column: Columns, taskId: string) {
@@ -100,6 +103,10 @@ class TasksStore {
     }
 
     return task;
+  }
+
+  setTaskWasChanged(value: boolean) {
+    this.taskWasChanged = value;
   }
 }
 
