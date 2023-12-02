@@ -1,3 +1,8 @@
+export enum Theme {
+  LIGHT = "light",
+  DARK = "dark",
+}
+
 export type Task = {
   id: string;
   created_at: number;
