@@ -92,6 +92,7 @@ const TaskDetails = observer(function TaskDetails() {
       status: status as Columns,
       priority,
       users,
+      index: task?.index || 0,
     };
 
     if (confirmDialogIsOpen) {
