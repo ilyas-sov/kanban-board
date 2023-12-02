@@ -15,34 +15,51 @@
     display: none;
   }
 
-  .slider {
+  .slider,
+  .shadow {
     position: absolute;
+    margin: auto;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 50%;
+  }
+
+  .slider {
     top: 20px;
     left: 0;
     right: 0;
-    margin: 0 auto;
     width: 2px;
     height: 2px;
-    border-radius: 50%;
-    background-color: transparent;
     transform: translateY(0px);
-    box-shadow: none;
     transition: transform 0.6s linear;
   }
 
-  input:checked ~ .slider {
+  .shadow {
+    bottom: 0px;
+    top: -15px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 17px;
+    height: 17px;
+  }
+
+  input:not(:checked) ~ .slider {
     transform: translateY(-12px);
     animation: light-up 0.3s linear forwards;
     animation-delay: 0.5s;
     background-color: gold;
   }
 
-  input:checked ~ .icon {
+  input:not(:checked) ~ .icon {
     path,
     line,
     polyline {
       stroke: var(--black);
     }
+  }
+
+  input:checked ~ .shadow {
+    animation: fade 0.5s linear forwards;
   }
 }
 
@@ -57,5 +74,17 @@
     box-shadow: 0 0 20px 7px gold;
     width: 17px;
     height: 17px;
+  }
+}
+
+@keyframes fade {
+  0% {
+    box-shadow: 0 0 0 5px rgba(255, 215, 0, 1);
+  }
+  90% {
+    box-shadow: 0 0 40px 15px rgba(255, 215, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
   }
 }
