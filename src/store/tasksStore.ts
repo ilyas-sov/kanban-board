@@ -26,7 +26,7 @@ class TasksStore {
         (task) => task.id !== taskId
       );
 
-      if (index) {
+      if (index || index === 0) {
         this.tasks[newColumn] = [
           ...this.tasks[newColumn].slice(0, index),
           { ...task, status: newColumn },
@@ -47,9 +47,19 @@ class TasksStore {
       status: Columns;
       priority: string;
       users: string[];
+      index: number;
     }
   ) {
-    this.changeStatus(column, taskId, newProperties.status);
+    if (column === newProperties.status) {
+      this.changeStatus(
+        column,
+        taskId,
+        newProperties.status,
+        newProperties.index
+      );
+    } else {
+      this.changeStatus(column, taskId, newProperties.status);
+    }
 
     const task = this.tasks[newProperties.status].find(
       (task) => task.id === taskId
@@ -81,8 +91,10 @@ class TasksStore {
 
       task = currentTasks.find((task) => task.id === id);
 
+      const taskIndex = task && currentTasks.indexOf(task);
+
       if (task) {
-        task = { ...task, status: currentColumn as Columns };
+        task = { ...task, status: currentColumn as Columns, index: taskIndex };
         break;
       }
     }
