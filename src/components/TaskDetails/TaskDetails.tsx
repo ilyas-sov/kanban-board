@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { tasksStore } from "../../store/tasksStore";
@@ -37,6 +37,15 @@ const TaskDetails = observer(function TaskDetails() {
     status !== task.status ||
     priority !== task.priority ||
     users.slice().sort().toString() !== task?.users.slice().sort().toString();
+
+  useEffect(() => {
+    if (task) {
+      tasksStore.setTaskWasChanged(taskWasChanged);
+    }
+  }, [task, taskWasChanged]);
+
+  if (!params.id) return <p>No information</p>;
+  if (!task) return <p>Task "{params.id}" not found</p>;
 
   function undoChangesHandler() {
     if (confirmDialogIsOpen) {
@@ -106,9 +115,6 @@ const TaskDetails = observer(function TaskDetails() {
       }
     }
   }
-
-  if (!params.id) return <p>No information</p>;
-  if (!task) return <p>Task "{params.id}" not found</p>;
 
   return (
     <div className={classes.details_container}>
