@@ -9,15 +9,15 @@ function ThemeToggler() {
     let timeout: ReturnType<typeof setTimeout> | number | undefined = undefined;
 
     if (togglerChecked) {
-      if (timeout !== null) {
+      clearTimeout(timeout);
+      document.body.classList.add("dark");
+    } else {
+      if (timeout) {
         clearTimeout(timeout);
       }
       timeout = setTimeout(() => {
         document.body.classList.remove("dark");
       }, 800);
-    } else {
-      clearTimeout(timeout);
-      document.body.classList.add("dark");
     }
 
     return () => {
@@ -38,6 +38,7 @@ function ThemeToggler() {
           togglerChecked ? classes.sun : classes.moon
         }`}
       ></span>
+      <span className={classes.shadow}></span>
     </label>
   );
 }
