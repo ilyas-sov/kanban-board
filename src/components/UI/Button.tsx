@@ -15,6 +15,7 @@ function Button({
 }: PropsWithChildren<ButtonType>) {
   return (
     <button
+      type="button"
       onClick={onClick}
       className={`${classes.button} ${className}`}
       disabled={disabled}
