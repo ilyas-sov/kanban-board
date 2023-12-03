@@ -61,7 +61,9 @@ function TaskCard({ task }: TaskCardType) {
         )}
       </div>
       <div className={classes.actions}>
-        <Link to={`/tasks/${task.id}`}>View details</Link>
+        <Link to={`/tasks/${task.id}`} className="default_button">
+          View details
+        </Link>
       </div>
     </div>
   );
