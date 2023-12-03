@@ -1,4 +1,5 @@
-import ConfirmDialog from "../dialogs/ConfirmDialog";
+import Button from "../UI/Button";
+import Portal from "../dialogs/Portal";
 import classes from "./TaskDetails.module.scss";
 
 type DeleteTaskConfirmationType = {
@@ -11,23 +12,18 @@ function DeleteTaskConfirmation({
   onDelete,
 }: DeleteTaskConfirmationType) {
   return (
-    <ConfirmDialog className={classes.confirm_dialog}>
+    <Portal className={classes.confirm_dialog}>
       <h3>
         Are you sure you want to delete the task? All data about this task will
         be deleted.
       </h3>
       <div className={classes.dialog_btns}>
-        <button className={classes.btn} onClick={onCancel}>
-          Cancel
-        </button>
-        <button
-          className={`${classes.btn} ${classes.delete}`}
-          onClick={onDelete}
-        >
+        <Button onClick={onCancel}>Cancel</Button>
+        <Button className={classes.delete_btn} onClick={onDelete}>
           Delete
-        </button>
+        </Button>
       </div>
-    </ConfirmDialog>
+    </Portal>
   );
 }
 
