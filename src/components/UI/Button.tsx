@@ -1,23 +1,27 @@
-import { PropsWithChildren } from "react";
-import classes from "./Button.module.scss";
+import { PropsWithChildren, SyntheticEvent } from "react";
+// import classes from "./Button.module.scss";
 
 type ButtonType = {
   className?: string;
+  type?: "button" | "submit" | "reset";
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: (() => void) | ((e: SyntheticEvent) => void);
 };
 
 function Button({
+  children,
+  type = "button",
   className,
   disabled,
   onClick,
-  children,
 }: PropsWithChildren<ButtonType>) {
+  const classNames = `default_button ${className}`;
+
   return (
     <button
-      type="button"
+      type={type}
+      className={classNames}
       onClick={onClick}
-      className={`${classes.button} ${className}`}
       disabled={disabled}
     >
       {children}
