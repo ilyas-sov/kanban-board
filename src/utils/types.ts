@@ -18,6 +18,12 @@ export type User = {
   name: string;
   surname: string;
   tasks: string[];
+  role: string;
+  photo: string | null;
+  contacts: {
+    email: string;
+    phone: string | null;
+  };
 };
 
 export type Tasks = {
