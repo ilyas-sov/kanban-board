@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useEffect, useState, useRef } from "react";
-import Button from "../UI/Button";
+import SquareButton from "../UI/SquareButton";
 import DoneIcon from "../icons/DoneIcon";
 import EditIcon from "../icons/EditIcon";
 import classes from "./TaskDetails.module.scss";
@@ -57,18 +57,21 @@ function TaskTitle({ taskTitle, onSetTitle }: TaskTitleType) {
         />
       )}
       {!editTitle && (
-        <Button className={classes.btn_mt_10} onClick={editTitleClickHandler}>
+        <SquareButton
+          className={classes.btn_mt_10}
+          onClick={editTitleClickHandler}
+        >
           <EditIcon />
-        </Button>
+        </SquareButton>
       )}
       {editTitle && (
-        <Button
+        <SquareButton
           className={`${classes.btn_mt_10} ${classes.save_btn}`}
           onClick={saveTitleClickHandler}
           disabled={!taskTitle}
         >
           <DoneIcon />
-        </Button>
+        </SquareButton>
       )}
     </div>
   );
