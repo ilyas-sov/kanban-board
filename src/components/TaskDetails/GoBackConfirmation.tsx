@@ -1,5 +1,6 @@
 import { SyntheticEvent } from "react";
-import ConfirmDialog from "../dialogs/ConfirmDialog";
+import Portal from "../dialogs/Portal";
+import Button from "../UI/Button";
 import classes from "./TaskDetails.module.scss";
 
 type GoBackConfirmationType = {
@@ -14,25 +15,18 @@ function GoBackConfirmation({
   onSaveChanges,
 }: GoBackConfirmationType) {
   return (
-    <ConfirmDialog className={classes.confirm_dialog}>
+    <Portal className={classes.confirm_dialog}>
       <h3>The changes were not applied. Are you sure you want to go back?</h3>
       <div className={classes.dialog_btns}>
-        <button className={classes.btn} onClick={onCancel}>
-          Cancel
-        </button>
+        <Button onClick={onCancel}>Cancel</Button>
         <div className={classes.actions}>
-          <button className={classes.btn} onClick={onUndoChanges}>
-            Undo changes
-          </button>
-          <button
-            className={`${classes.btn} ${classes.save}`}
-            onClick={onSaveChanges}
-          >
+          <Button onClick={onUndoChanges}>Undo changes</Button>
+          <Button className={classes.save} onClick={onSaveChanges}>
             Save changes
-          </button>
+          </Button>
         </div>
       </div>
-    </ConfirmDialog>
+    </Portal>
   );
 }
 
