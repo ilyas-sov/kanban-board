@@ -4,6 +4,7 @@ import { tasksStore } from "../../store/tasksStore";
 import { usersStore } from "../../store/usersStore";
 import { priorityOptions } from "../../utils/options"; // replace with import from store
 import { Columns } from "../../utils/types";
+import Button from "../UI/Button";
 import Portal from "./Portal";
 import Options from "../Options";
 import Tag from "../Tag";
@@ -113,12 +114,12 @@ function NewTaskDialog({ onClose }: NewTaskDialogType) {
           }
         />
         <div className={classes.actions}>
-          <button type="button" className={classes.cancel} onClick={onClose}>
+          <Button type="button" onClick={onClose}>
             Cancel
-          </button>
-          <button type="submit" className={classes.add}>
+          </Button>
+          <Button type="submit" className={classes.add}>
             Add
-          </button>
+          </Button>
         </div>
       </form>
     </Portal>
