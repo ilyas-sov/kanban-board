@@ -9,10 +9,11 @@ import TaskTitle from "./TaskTitle";
 import TaskUsers from "./TaskUsers";
 import TaskStatus from "./TaskStatus";
 import TaskDescription from "./TaskDescription";
-import Button from "../UI/Button";
+import SquareButton from "../UI/SquareButton";
 import DeleteTaskConfirmation from "./DeleteTaskConfirmation";
 import GoBackConfirmation from "./GoBackConfirmation";
 import classes from "./TaskDetails.module.scss";
+import Button from "../UI/Button";
 
 const TaskDetails = observer(function TaskDetails() {
   const params = useParams();
@@ -123,7 +124,7 @@ const TaskDetails = observer(function TaskDetails() {
           <div>
             <Link
               to="/"
-              className={`${classes.btn} ${classes.btn_back}`}
+              className={`default_button ${classes.btn_back}`}
               onClick={goBackHandler}
             >
               <ArrowLeftIcon /> Back
@@ -137,12 +138,12 @@ const TaskDetails = observer(function TaskDetails() {
                 onDeleteTask={deleteTaskHandler}
               />
             )}
-            <Button
+            <SquareButton
               className={`${classes.btn_mt_10} ${classes.options_btn}`}
               onClick={optionsHandler}
             >
               <span>•••</span>
-            </Button>
+            </SquareButton>
           </div>
         </div>
         <TaskTitle taskTitle={title} onSetTitle={setTitle} />
@@ -161,21 +162,20 @@ const TaskDetails = observer(function TaskDetails() {
           onSetDescription={setDescription}
         />
         <div className={classes.actions}>
-          <button
+          <Button
             type="button"
-            className={classes.btn}
             disabled={!taskWasChanged}
             onClick={undoChangesHandler}
           >
             Undo changes
-          </button>
-          <button
+          </Button>
+          <Button
             type="submit"
-            className={`${classes.btn} ${classes.save}`}
+            className={classes.save}
             disabled={!taskWasChanged}
           >
             Save changes
-          </button>
+          </Button>
         </div>
       </form>
       {confirmDialogIsOpen && (
