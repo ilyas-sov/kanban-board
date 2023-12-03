@@ -1,7 +1,8 @@
 import { SyntheticEvent, useState } from "react";
-import Portal from "./Portal";
 import { observer } from "mobx-react-lite";
 import { columns } from "../../store/columnsStore";
+import Portal from "./Portal";
+import Button from "../UI/Button";
 import classes from "./NewColumnDialog.module.scss";
 
 type NewColumnDialogType = {
@@ -41,12 +42,12 @@ const NewColumnDialog = observer(function NewColumnDialog({
           <p className={classes.error_message}>{columns.error}</p>
         )}
         <div className={classes.actions}>
-          <button type="button" className={classes.cancel} onClick={onClose}>
+          <Button type="button" onClick={onClose}>
             Cancel
-          </button>
-          <button type="submit" className={classes.add}>
+          </Button>
+          <Button type="submit" className={classes.add}>
             Add
-          </button>
+          </Button>
         </div>
       </form>
     </Portal>
