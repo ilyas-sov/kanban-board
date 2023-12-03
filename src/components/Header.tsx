@@ -2,6 +2,7 @@ import { SyntheticEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { tasksStore } from "../store/tasksStore";
+import Button from "./UI/Button";
 import NewTaskDialog from "./dialogs/NewTaskDialog";
 import NewColumnDialog from "./dialogs/NewColumnDialog";
 import ThemeToggler from "./ThemeToggler/ThemeToggler";
@@ -48,8 +49,8 @@ const Header = observer(function Header() {
         </ul>
       </nav>
       <div className={classes.actions}>
-        <button onClick={() => setTaskDialogIsOpen(true)}>Add Task</button>
-        <button onClick={() => setColumnDialogIsOpen(true)}>Add Column</button>
+        <Button onClick={() => setTaskDialogIsOpen(true)}>Add Task</Button>
+        <Button onClick={() => setColumnDialogIsOpen(true)}>Add Column</Button>
         <ThemeToggler />
       </div>
       {taskDialogIsOpen && (
