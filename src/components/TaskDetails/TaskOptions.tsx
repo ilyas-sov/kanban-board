@@ -1,3 +1,4 @@
+import Button from "../UI/Button";
 import classes from "./TaskDetails.module.scss";
 
 type TaskOptionsType = {
@@ -11,13 +12,13 @@ function TaskOptions({ options, onDeleteTask }: TaskOptionsType) {
       <ul>
         {options.map((option) => (
           <li key={option}>
-            <button
+            <Button
               type="button"
-              className={classes.btn}
+              className={classes.delete_btn}
               onClick={onDeleteTask}
             >
               {option}
-            </button>
+            </Button>
           </li>
         ))}
       </ul>
