@@ -35,23 +35,11 @@
       gap: 15px;
       margin-top: 10px;
 
-      button {
-        font-size: 1rem;
-        padding: 5px 10px;
-        border: none;
-        border-radius: 4px;
-        background-color: var(--btn-main);
+      .add {
+        background-color: var(--accent-secondary);
 
         &:hover {
-          background-color: var(--btn-secondary);
-        }
-
-        &.add {
-          background-color: var(--accent-secondary);
-
-          &:hover {
-            background-color: var(--accent-main);
-          }
+          background-color: var(--accent-main);
         }
       }
     }
