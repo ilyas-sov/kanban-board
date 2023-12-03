@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from "react";
-import Button from "../UI/Button";
+import SquareButton from "../UI/SquareButton";
 import EditIcon from "../icons/EditIcon";
 import DoneIcon from "../icons/DoneIcon";
 import classes from "./TaskDetails.module.scss";
@@ -40,14 +40,17 @@ function TaskDescription({
         />
       )}
       {!editDescription && (
-        <Button onClick={editTitleClickHandler}>
+        <SquareButton onClick={editTitleClickHandler}>
           <EditIcon />
-        </Button>
+        </SquareButton>
       )}
       {editDescription && (
-        <Button className={classes.save_btn} onClick={saveTitleClickHandler}>
+        <SquareButton
+          className={classes.save_btn}
+          onClick={saveTitleClickHandler}
+        >
           <DoneIcon />
-        </Button>
+        </SquareButton>
       )}
     </div>
   );
