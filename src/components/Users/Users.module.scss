@@ -1,0 +1,70 @@
+.list {
+  & > li {
+    background-color: var(--bg-secondary);
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px;
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+
+      .name {
+        min-width: 20%;
+
+        p:last-child {
+          font-size: 0.8rem;
+        }
+      }
+
+      .active_tasks {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex: 1;
+
+        p {
+          font-size: 0.8rem;
+        }
+
+        ul {
+          display: flex;
+          gap: 10px;
+
+          a {
+            font-size: 0.8rem;
+            padding: 3px 5px;
+            color: var(--text-color-main);
+
+            &:hover {
+              color: var(--text-color-dark);
+            }
+          }
+        }
+      }
+
+      & > a {
+        color: var(--text-color-main);
+        font-size: 0.8rem;
+
+        &:hover {
+          color: var(--black);
+          background-color: var(--accent-main);
+        }
+      }
+    }
+  }
+}
+
+.avatar_container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  img {
+    width: 100%;
+  }
+}
