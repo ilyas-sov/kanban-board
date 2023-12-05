@@ -1,7 +1,8 @@
 import { SyntheticEvent, useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { tasksStore } from "../../store/tasksStore";
+import { usersStore } from "../../store/usersStore";
 import { Columns } from "../../utils/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import TaskOptions from "./TaskOptions";
@@ -51,7 +52,7 @@ const TaskDetails = observer(function TaskDetails() {
   function undoChangesHandler() {
     if (confirmDialogIsOpen) {
       resetState();
-      navigate("/");
+      navigate(-1);
     } else {
       resetState();
     }
@@ -67,10 +68,12 @@ const TaskDetails = observer(function TaskDetails() {
     }
   }
 
-  function goBackHandler(e: SyntheticEvent<HTMLAnchorElement>) {
+  function goBackHandler(e: SyntheticEvent) {
     if (taskWasChanged) {
       e.preventDefault();
       setConfirmDialogIsOpen(true);
+    } else {
+      navigate(-1);
     }
   }
 
@@ -105,14 +108,28 @@ const TaskDetails = observer(function TaskDetails() {
       index: task?.index || 0,
     };
 
+    const deletedUsers = task!.users.filter(
+      (userId) => !users.includes(userId)
+    );
+    const addedUsers = users.filter((userId) => !task!.users.includes(userId));
+
     if (confirmDialogIsOpen) {
       if (task) {
         tasksStore.updateTask(task.status as Columns, task.id, newProperties);
+        deletedUsers.forEach((user) =>
+          usersStore.deleteTaskById(user, task!.id)
+        );
+        addedUsers.forEach((user) => usersStore.addTaskById(user, task!.id));
       }
-      navigate("/");
+
+      navigate(-1);
     } else {
       if (task) {
         tasksStore.updateTask(task.status as Columns, task.id, newProperties);
+        deletedUsers.forEach((user) =>
+          usersStore.deleteTaskById(user, task!.id)
+        );
+        addedUsers.forEach((user) => usersStore.addTaskById(user, task!.id));
       }
     }
   }
@@ -122,13 +139,9 @@ const TaskDetails = observer(function TaskDetails() {
       <form onSubmit={submitHandler}>
         <div className={classes.header}>
           <div>
-            <Link
-              to="/"
-              className={`default_button ${classes.btn_back}`}
-              onClick={goBackHandler}
-            >
+            <Button className={classes.btn_back} onClick={goBackHandler}>
               <ArrowLeftIcon /> Back
-            </Link>
+            </Button>
             <p>Task: {task.id}</p>
           </div>
           <div>
