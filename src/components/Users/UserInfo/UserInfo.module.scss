@@ -1,0 +1,135 @@
+.info_container {
+  margin: 0 auto;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
+  padding: 20px 40px;
+
+  & div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .btn_back {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: var(--black);
+
+      svg {
+        width: 8px;
+      }
+    }
+  }
+
+  .personal_info {
+    display: flex;
+    gap: 40px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+
+    .name {
+      flex: 1;
+    }
+
+    .contacts {
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        font-weight: normal;
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-color-main);
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .active_tasks {
+    margin-top: 20px;
+
+    h2 {
+      font-weight: normal;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--text-color-main);
+      padding: 5px 10px;
+      margin-bottom: 5px;
+
+      span:nth-child(1) {
+        width: 5%;
+      }
+
+      span:nth-child(2) {
+        flex: 2;
+        max-width: 400px;
+      }
+
+      span:nth-child(3) {
+        flex: 0.8;
+      }
+
+      span:nth-child(4) {
+        flex: 0.5;
+      }
+    }
+
+    ul {
+      li {
+        margin-bottom: 10px;
+
+        .task_link {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+          color: var(--text-color-main);
+          background-color: var(--bg-body);
+          padding: 5px 10px;
+          border-radius: 4px;
+
+          &:hover {
+            background-color: var(--btn-main);
+          }
+
+          p {
+            flex: 2;
+            max-width: 400px;
+            text-wrap: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .id {
+            width: 5%;
+          }
+
+          .status {
+            flex: 0.8;
+          }
+
+          .priority {
+            flex: 0.5;
+          }
+
+          .inProgress {
+            color: var(--accent-blue-main);
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
