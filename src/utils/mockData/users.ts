@@ -5,7 +5,7 @@ export const initialUsers: User[] = [
     id: "1",
     name: "John",
     surname: "Doe",
-    tasks: ["001", "004", "005"],
+    tasks: ["001"],
     role: "Backend Developer",
     photo: null,
     contacts: {
@@ -17,9 +17,10 @@ export const initialUsers: User[] = [
     id: "2",
     name: "Alice",
     surname: "Smith",
-    tasks: ["002", "003", "004"],
+    tasks: ["003", "004"],
     role: "Frontend Developer",
-    photo: null,
+    photo:
+      "https://img.freepik.com/premium-photo/illustration-girl-with-brown-hair-holding-rose_893012-188649.jpg",
     contacts: {
       email: "alice@example.com",
       phone: "+1987654321",
@@ -29,7 +30,7 @@ export const initialUsers: User[] = [
     id: "3",
     name: "Grace",
     surname: "Williams",
-    tasks: ["004"],
+    tasks: ["001", "002"],
     role: "Backend Developer",
     photo: null,
     contacts: {
@@ -41,9 +42,10 @@ export const initialUsers: User[] = [
     id: "4",
     name: "Emma",
     surname: "Johnson",
-    tasks: ["002", "005"],
+    tasks: ["005"],
     role: "Senior QA Engineer",
-    photo: null,
+    photo:
+      "https://img.freepik.com/premium-photo/colorful-abstract-faded-into-face_816702-1608.jpg",
     contacts: {
       email: "emma@example.com",
       phone: "+1122334455",
@@ -55,7 +57,8 @@ export const initialUsers: User[] = [
     surname: "Brown",
     tasks: ["003"],
     role: "Frontend Developer",
-    photo: null,
+    photo:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiaFn2M6grj_vhugvOv3WQzt1U9ESGgRnU8DVr-M2aZp_kIE7liaIDmtW2ZZgKpIPP-ss&usqp=CAU",
     contacts: {
       email: "michael@example.com",
       phone: null,
@@ -65,7 +68,7 @@ export const initialUsers: User[] = [
     id: "6",
     name: "Daniel",
     surname: "Miller",
-    tasks: ["001", "002"],
+    tasks: ["001"],
     role: "DevOps Engineer",
     photo: null,
     contacts: {

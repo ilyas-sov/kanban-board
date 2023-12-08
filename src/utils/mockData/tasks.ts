@@ -5,31 +5,31 @@ export const initialTasks: Tasks = {
     {
       id: "001",
       created_at: 1698135600,
-      title: "Revamp Website Interface",
+      title: "User Authentication and Authorization System",
       description:
-        "Overhaul the website UI/UX design to enhance user engagement and accessibility. Implement modern design principles and responsive layouts for a seamless browsing experience.",
+        "Develop a user authentication and authorization system to manage access control and security within our backend infrastructure. The system should include robust authentication mechanisms to verify user identities securely and manage user sessions. Additionally, it should implement authorization policies to control what actions different users or user roles can perform within the application.",
       status: Columns.TODO,
       priority: "high",
-      users: ["1", "6"],
+      users: ["1", "3", "6"],
     },
     {
       id: "002",
       created_at: 1698135600,
-      title: "Content Optimization Strategy",
+      title: "Data Processing Pipeline for Real-Time Analytics",
       description:
-        "Develop a comprehensive content optimization plan to improve search engine rankings and user engagement. Conduct keyword research, update meta descriptions, and enhance content quality.",
+        "Design and implement a data processing pipeline capable of handling large volumes of real-time data for performing analytics and generating insights. The pipeline should efficiently collect, process, and analyze incoming data streams, providing actionable information for decision-making and reporting purposes.",
       status: Columns.TODO,
       priority: "medium",
-      users: ["2", "4", "6"],
+      users: ["3"],
     },
   ],
   [Columns.IN_PROGRESS]: [
     {
       id: "003",
       created_at: 1698135600,
-      title: "Enhance Data Analytics Module",
+      title: "Interactive Dashboard for Real-Time Data Visualization",
       description:
-        "Expand the functionality of the data analytics module by integrating advanced algorithms for predictive analysis. Improve data visualization tools and optimize data processing techniques.",
+        "Create an interactive web-based dashboard to visualize and present the insights derived from real-time data processed by the backend system. The dashboard should provide a user-friendly interface for stakeholders to monitor key metrics, trends, and analytics in an intuitive and visually appealing manner.",
       status: Columns.IN_PROGRESS,
       priority: "low",
       users: ["2", "5"],
@@ -39,22 +39,22 @@ export const initialTasks: Tasks = {
     {
       id: "004",
       created_at: 1698135600,
-      title: "Bug Fixes and Performance Tuning",
+      title: "Task Management and Collaboration Platform",
       description:
-        "Address reported bugs and issues across the application. Optimize codebase for better performance and scalability, ensuring a smoother user experience.",
+        "Develop a web-based task management and collaboration platform that allows users to create, organize, assign, and track tasks within a team or organization. The platform should facilitate seamless communication, task delegation, progress monitoring, and reporting to enhance productivity and teamwork.",
       status: Columns.DONE,
       priority: "high",
-      users: ["1", "2", "3"],
+      users: ["2"],
     },
     {
       id: "005",
       created_at: 1698135600,
-      title: "Product Launch Marketing Plan",
+      title: "Quality Assurance Framework Implementation for Web Applications",
       description:
-        "Develop a comprehensive marketing strategy for the upcoming product launch. Outline promotional campaigns, target audience identification, and channel selection for maximum outreach.",
+        "Develop and implement a comprehensive Quality Assurance (QA) framework tailored for ensuring the reliability, functionality, and performance of web applications. The framework should include strategies, processes, and tools to conduct thorough testing, identify defects, and ensure the delivery of high-quality software.",
       status: Columns.DONE,
       priority: "medium",
-      users: ["1", "4"],
+      users: ["4"],
     },
   ],
 };
