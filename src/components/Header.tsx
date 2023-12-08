@@ -12,10 +12,8 @@ const Header = observer(function Header() {
   const [taskDialogIsOpen, setTaskDialogIsOpen] = useState(false);
   const [columnDialogIsOpen, setColumnDialogIsOpen] = useState(false);
 
-  const taskWasChanged = tasksStore.taskWasChanged;
-
-  function goHomeHandler(e: SyntheticEvent, path: string = "/") {
-    if (taskWasChanged) {
+  function goHomeHandler(e: SyntheticEvent) {
+    if (e && tasksStore.taskWasChanged) {
       e.preventDefault();
       alert("Please save the changes or cancel them before leaving the page.");
     }
@@ -31,18 +29,12 @@ const Header = observer(function Header() {
       <nav>
         <ul>
           <li>
-            <Link
-              to="/tasks"
-              onClick={(e: SyntheticEvent) => goHomeHandler(e, "/tasks")}
-            >
+            <Link to="/tasks" onClick={goHomeHandler}>
               Tasks
             </Link>
           </li>
           <li>
-            <Link
-              to="/users"
-              onClick={(e: SyntheticEvent) => goHomeHandler(e, "/users")}
-            >
+            <Link to="/users" onClick={goHomeHandler}>
               Users
             </Link>
           </li>

@@ -46,6 +46,7 @@ function TaskTitle({ taskTitle, onSetTitle }: TaskTitleType) {
       {!editTitle && <h3>{taskTitle}</h3>}
       {editTitle && (
         <textarea
+          name="task title"
           className={`${classes.task_title_textarea} ${
             !taskTitle && classes.required
           }`}

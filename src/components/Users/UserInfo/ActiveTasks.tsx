@@ -22,27 +22,32 @@ function ActiveTasks({ tasks }: { tasks: string[] }) {
 
   return (
     <div className={classes.active_tasks}>
-      <h2>Active Tasks</h2>
-      <div className={classes.heading}>
-        <span>ID</span>
-        <span>TITLE</span>
-        <span>STATUS</span>
-        <span>PRIORITY</span>
-      </div>
-      <ul>
-        {activeTasks.map((task) => (
-          <li key={task.id}>
-            <Link to={`/tasks/${task.id}`} className={classes.task_link}>
-              <ActiveTasksItem
-                id={task.id}
-                title={task.title}
-                status={task.status}
-                priority={task.priority}
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {activeTasks.length > 0 && (
+        <>
+          <h2>Active Tasks</h2>
+          <div className={classes.heading}>
+            <span>ID</span>
+            <span>TITLE</span>
+            <span>STATUS</span>
+            <span>PRIORITY</span>
+          </div>
+          <ul>
+            {activeTasks.map((task) => (
+              <li key={task.id}>
+                <Link to={`/tasks/${task.id}`} className={classes.task_link}>
+                  <ActiveTasksItem
+                    id={task.id}
+                    title={task.title}
+                    status={task.status}
+                    priority={task.priority}
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {activeTasks.length === 0 && <p>No active tasks</p>}
     </div>
   );
 }

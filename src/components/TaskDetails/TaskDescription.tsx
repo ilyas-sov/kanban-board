@@ -33,6 +33,7 @@ function TaskDescription({
       {!editDescription && <p>{taskDescription}</p>}
       {editDescription && (
         <textarea
+          name="task description"
           className={classes.task_description_textarea}
           value={taskDescription}
           placeholder="Description of the task"

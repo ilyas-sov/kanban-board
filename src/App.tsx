@@ -12,8 +12,8 @@ function App() {
         <Route index element={<Navigate to="/tasks" />} />
         <Route path="/tasks" element={<Main />} />
         <Route path="/tasks/:id" element={<TaskDetails />} />
-        <Route path="users" element={<Users />} />
-        <Route path="users/:name" element={<UserInfo />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/users/:name" element={<UserInfo />} />
       </Route>
     </Routes>
   );

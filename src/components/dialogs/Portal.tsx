@@ -12,7 +12,9 @@ function DialogWindow({
   return (
     <>
       <div className={classes.backdrop}></div>
-      <div className={`${classes.dialog} ${className}`}>{children}</div>
+      <div className={`${classes.dialog} ${className}`} data-testid="dialog">
+        {children}
+      </div>
     </>
   );
 }
