@@ -4,6 +4,7 @@ import { User } from "../utils/types";
 
 class UsersStore {
   users: User[] = initialUsers;
+  criteria: string = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -33,6 +34,32 @@ class UsersStore {
 
       this.users[userIndex].tasks.push(taskId);
     }
+  }
+
+  setSearchCriteria(newCriteria: string) {
+    this.criteria = newCriteria;
+  }
+
+  get filteredUsersByValue() {
+    const criteriaArray = this.criteria
+      .split(" ")
+      .map((word) => word.toLowerCase());
+
+    return this.users.filter((user) => {
+      let isMatch: boolean[] = [];
+
+      criteriaArray.forEach((value) => {
+        isMatch.push(
+          user.id.toLowerCase().includes(value) ||
+            user.name.toLowerCase().includes(value) ||
+            user.surname.toLowerCase().includes(value) ||
+            user.role.toLowerCase().includes(value) ||
+            !!user.tasks.find((taskId) => taskId.includes(value))
+        );
+      });
+
+      return isMatch.every(Boolean);
+    });
   }
 }
 
