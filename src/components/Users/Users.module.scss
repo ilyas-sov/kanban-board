@@ -1,3 +1,36 @@
+.search_input_container {
+  margin-bottom: 20px;
+  position: relative;
+
+  input {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    color: var(--text-color-main);
+  }
+
+  svg {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    bottom: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    cursor: pointer;
+
+    path {
+      fill: var(--btn-secondary);
+    }
+
+    &:hover path {
+      fill: var(--btn-main);
+    }
+  }
+}
+
 .list {
   & > li {
     background-color: var(--bg-secondary);
@@ -59,12 +92,20 @@
   }
 }
 
+p.no_users_found {
+  text-align: center;
+}
+
 .avatar_container {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
 
   img {
+    font-size: 0.5rem;
+    display: block;
+    overflow: hidden;
     width: 100%;
+    height: 100%;
+    border-radius: 50%;
   }
 }
