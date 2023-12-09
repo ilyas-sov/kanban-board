@@ -13,8 +13,8 @@ import TaskDescription from "./TaskDescription";
 import SquareButton from "../UI/SquareButton";
 import DeleteTaskConfirmation from "./DeleteTaskConfirmation";
 import GoBackConfirmation from "./GoBackConfirmation";
-import classes from "./TaskDetails.module.scss";
 import Button from "../UI/Button";
+import classes from "./TaskDetails.module.scss";
 
 const TaskDetails = observer(function TaskDetails() {
   const params = useParams();
@@ -26,7 +26,7 @@ const TaskDetails = observer(function TaskDetails() {
   const [description, setDescription] = useState(task?.description ?? "");
   const [status, setStatus] = useState<Columns>(task?.status ?? Columns.TODO);
   const [priority, setPriority] = useState(task?.priority ?? "none");
-  const [users, setUsers] = useState(task?.users ?? []);
+  const [users, setUsers] = useState<string[]>(task?.users ?? []);
 
   const [confirmDialogIsOpen, setConfirmDialogIsOpen] = useState(false);
   const [optionsAreOpened, setOptionsAreOpened] = useState(false);
@@ -167,7 +167,7 @@ const TaskDetails = observer(function TaskDetails() {
             onSetStatus={setStatus}
             onSetPriority={setPriority}
           />
-          <TaskUsers users={[...users]} onSetUsers={setUsers} />
+          <TaskUsers users={users} onSetUsers={setUsers} />
         </div>
         <p className={classes.label}>Description:</p>
         <TaskDescription

@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import SquareButton from "../UI/SquareButton";
 import EditIcon from "../icons/EditIcon";
 import DoneIcon from "../icons/DoneIcon";
@@ -57,4 +57,4 @@ function TaskDescription({
   );
 }
 
-export default TaskDescription;
+export default React.memo(TaskDescription);

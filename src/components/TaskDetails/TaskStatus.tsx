@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { columnOptions, priorityOptions } from "../../utils/options";
 import { Columns } from "../../utils/types";
 import Options from "../Options";
@@ -45,4 +45,4 @@ function TaskStatus({
   );
 }
 
-export default TaskStatus;
+export default React.memo(TaskStatus);

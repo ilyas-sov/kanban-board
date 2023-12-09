@@ -32,7 +32,6 @@ function Users() {
             <li key={user.id}>
               <UserCard
                 photo={user.photo}
-                id={user.id}
                 name={user.name}
                 surname={user.surname}
                 role={user.role}

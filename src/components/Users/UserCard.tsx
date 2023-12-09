@@ -1,17 +1,17 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import UserAvatar from "./UserAvatar";
 import classes from "./Users.module.scss";
 
 type UserCardType = {
   photo: string | null;
-  id: string;
   name: string;
   surname: string;
   role: string;
   tasks: string[];
 };
 
-function UserCard({ photo, id, name, surname, role, tasks }: UserCardType) {
+function UserCard({ photo, name, surname, role, tasks }: UserCardType) {
   const userUrl = `${name.toLowerCase()}-${surname.toLowerCase()}`;
   return (
     <div className={classes.container}>
@@ -41,4 +41,4 @@ function UserCard({ photo, id, name, surname, role, tasks }: UserCardType) {
   );
 }
 
-export default UserCard;
+export default React.memo(UserCard);

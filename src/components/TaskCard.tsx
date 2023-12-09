@@ -19,7 +19,16 @@ function TaskCard({ task }: TaskCardType) {
 
   function dragOverHandler() {}
 
-  const users = usersStore.users.filter((user) => task.users.includes(user.id));
+  const users = usersStore.users
+    .filter((user) => task.users.includes(user.id))
+    .sort((a, b) => {
+      if (a.name > b.name) return 1;
+      if (a.name < b.name) return -1;
+      else {
+        if (a.surname > b.surname) return 1;
+        else return -1;
+      }
+    });
 
   return (
     <div
@@ -42,20 +51,11 @@ function TaskCard({ task }: TaskCardType) {
           <>
             <p>Assignees: </p>
             <ul>
-              {users
-                .sort((a, b) => {
-                  if (a.name > b.name) return 1;
-                  if (a.name < b.name) return -1;
-                  else {
-                    if (a.surname > b.surname) return 1;
-                    else return -1;
-                  }
-                })
-                .map((user) => (
-                  <li key={user.id}>
-                    {user.name} {user.surname}
-                  </li>
-                ))}
+              {users.map((user) => (
+                <li key={user.id}>
+                  {user.name} {user.surname}
+                </li>
+              ))}
             </ul>
           </>
         )}

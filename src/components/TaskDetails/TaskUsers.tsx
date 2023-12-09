@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { usersStore } from "../../store/usersStore";
 import { User } from "../../utils/types";
 import Tag from "../Tag";
@@ -19,15 +19,15 @@ function TaskUsers({ users, onSetUsers }: TaskUsersType) {
   }));
 
   useEffect(() => {
-    const usersInfo: User[] = [];
+    const newUsersInfo: User[] = [];
 
     users.forEach((userId) => {
       const user = usersStore.getUserById(userId);
 
-      if (user) usersInfo.push(user);
+      if (user) newUsersInfo.push(user);
     });
 
-    setUsersInfo(usersInfo);
+    setUsersInfo(newUsersInfo);
   }, [users]);
 
   function assignUser(e: ChangeEvent<HTMLSelectElement>) {
@@ -60,8 +60,9 @@ function TaskUsers({ users, onSetUsers }: TaskUsersType) {
           {usersInfo.map((user) => (
             <li key={user.id}>
               <Tag
+                id={user.id}
                 value={`${user.name} ${user.surname}`}
-                onDelete={() => deleteAssignee(user.id)}
+                onDelete={deleteAssignee}
               />
             </li>
           ))}
@@ -71,4 +72,4 @@ function TaskUsers({ users, onSetUsers }: TaskUsersType) {
   );
 }
 
-export default TaskUsers;
+export default React.memo(TaskUsers);

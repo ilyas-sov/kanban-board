@@ -1,4 +1,4 @@
-import { SyntheticEvent, ChangeEvent, useState } from "react";
+import { SyntheticEvent, ChangeEvent, useState, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { tasksStore } from "../../store/tasksStore";
 import { usersStore } from "../../store/usersStore";
@@ -43,9 +43,9 @@ function NewTaskDialog({ onClose }: NewTaskDialogType) {
     ]);
   }
 
-  function deleteAssignee(id: string) {
+  const deleteAssignee = useCallback(function deleteAssignee(id: string) {
     setAssignees((prev) => prev.filter((user) => user.id !== id));
-  }
+  }, []);
 
   function submitHandler(e: SyntheticEvent) {
     e.preventDefault();
@@ -84,8 +84,9 @@ function NewTaskDialog({ onClose }: NewTaskDialogType) {
           {assignees.map((assignee) => (
             <li key={assignee.id}>
               <Tag
+                id={assignee.id}
                 value={assignee.value}
-                onDelete={() => deleteAssignee(assignee.id)}
+                onDelete={deleteAssignee}
               />
             </li>
           ))}

@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { flushSync } from "react-dom";
 import { observer } from "mobx-react-lite";
 import { Columns } from "../utils/types";
@@ -12,7 +13,7 @@ const columnsArray = Object.entries(columns.columns).map(([_, value]) => value);
 const Main = observer(function Main() {
   const cards = tasksStore.tasks;
 
-  function onDrop(column: Columns, index: number) {
+  const onDrop = useCallback(function onDrop(column: Columns, index: number) {
     if (!kanbanStore.draggingCard) return;
 
     const task = tasksStore.getTask(kanbanStore.draggingCard);
@@ -34,7 +35,7 @@ const Main = observer(function Main() {
         );
       });
     }
-  }
+  }, []);
 
   return (
     <div className={classes.kanban_board}>
